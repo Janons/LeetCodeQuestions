@@ -1,21 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 // prototype
 double myPow(double x, int n);
+
 int fibonacci(int n);
 
 int main()
+
 {
-    double x, result;
-    int n, i;
-
-    n = 10;
-    x = 2;
-
-    result = myPow(x, n);
-
-    fprintf(stdout, "The result is ->%f ", result);
+    return 0;
 }
 int fibonacci(int n)
 {
@@ -32,14 +27,28 @@ int fibonacci(int n)
 }
 double myPow(double x, int n)
 {
-    int p;
-    // backtracking part
-    if (p > n)
-        return x;
-    
-    else{
-        p++;
+    bool isNeg;
+    double result;
+
+    isNeg = (n < 0) ? true : false;
+
+    if (n == 0)
+    {
+        return 1.0;
     }
 
-    return myPow(x, n) * myPow(x, n);
+    int half = n / 2; // integer division
+    int r = n - (half * 2);
+
+    result = myPow(x, half);
+    result *= result;
+
+    result = (r == 1) ? result * x : result;
+
+    if (isNeg)
+    {
+        return 1 / result;
+    }
+
+    return result;
 }
