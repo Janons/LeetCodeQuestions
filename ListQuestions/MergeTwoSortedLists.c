@@ -26,9 +26,15 @@ struct ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
     ListNode *tail = &dummy;
 
     // condition checks
-    if (list1->next == NULL && list2->next == NULL)
+
+    if (list1 == NULL)
     {
-        return NULL;
+        tail->next = list2;
+    }
+
+    else if (list2 == NULL)
+    {
+        tail->next = list2;
     }
 
     // the loop to check the values
@@ -36,8 +42,23 @@ struct ListNode *mergeTwoLists(ListNode *list1, ListNode *list2)
     {
         // makng the comparisons
 
-        if (list1->val <= list->val)
+        if (list1->val <= list2->val)
         {
-            
+            ListNode *new_Node;
+            new_Node = list1;
+            list1 = list1->next;
+            new_Node->next = tail->next;
+            tail->next = new_Node;
         }
+
+        else
+        {
+            ListNode *new_Node;
+            list2 = list2->next;
+            new_Node->next = tail->next;
+            tail->next = new_Node;
+        }
+        tail = tail->next;
     }
+    return (dummy.next);
+}
